@@ -22,7 +22,8 @@ principles:
 [
 Initializing redux store:
 Redux store will take a function(reducer) and passes an action of random type to this for the first time
-When this happens our reducer should be in a position to return initial state to redux
+When this happens our reducer should be in a position to return initial state to redux. For this we should use default parameter to reducer
+Default parameter is initial state like const red = (red = initialRed, action) => {}
 Now redux keeps this state in the store
 
 when we do store.getState it will return this state only
