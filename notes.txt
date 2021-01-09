@@ -1,0 +1,54 @@
+-> Predictable state container for js. Can be used for any js framework vue, js, react etc
+-> State container. It stores state of application
+-> Redux stores and manages application state
+-> All state transitions are explicit in redux and can be traced
+-> React and redux both work independently. To tie them we use the library react-redux
+-> react-redux provides bindings to use react and redux together
+
+Cake shop:
+entities -> shop (stores cakes), shopkeeper (at front of store), customer (in shop)
+activities:
+customer -> buy cake, shop keeper -> remove cake from shelf and generate receipt
+
+shop -> redux store
+activities -> redux actions
+shopkeeper -> reducer (Ties store and actions together)
+
+principles:
+1. state of whole applcation is stored in obj tree with in a single store
+2. only way to change state is dispatch an action with an obj describing diff
+3. to specify how state is transformed write pure reducers (pure functions that take prev state and return new state)
+
+[
+Initializing redux store:
+Redux store will take a function(reducer) and passes an action of random type to this for the first time
+When this happens our reducer should be in a position to return initial state to redux
+Now redux keeps this state in the store
+
+when we do store.getState it will return this state only
+Redux defined that a reducer should have two parameters, existing state and action & it should return new state based on the action
+
+On every subsequent dispatch redux will call the reducer with the action we provide and the state it has
+]
+
+Common Redux misconception: you need to deeply clone the state.
+Reality: if something inside doesn't change, keep its reference the same!
+
+
+Actions:
+only way to interact with store. These are plain js objs and have type property
+
+
+-> Redux only accepts reducer. It won't take state directly. Reducer takes the state
+First time when app opens there will be a initial state that has to be passed to reducer args like
+
+const reducer = (state = initialState, action) => {}
+-> Store gives a subscribe function which accepts a listener.
+-> With this listener, we should update entire state when store changes
+-> Subscribe adds a change listener. It will be called any time an action is dispatched, and some part of the state tree may potentially have changed.
+
+-> Redux uses object references to identify if state has changed or not.
+-> If we do a deep copy object reference changes. But doing deepcopy of entire state is meaning less
+-> We can do deepcopy of only that nested object that we are changing
+https://redux.js.org/faq/immutable-data#why-is-immutability-required-by-redux
+
